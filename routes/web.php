@@ -7,7 +7,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
-    return view('welcome')->name('welcome');
+    return view('welcome');
 });
 
 Route::middleware(['auth'])->group(function () {

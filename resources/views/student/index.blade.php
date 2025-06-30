@@ -3,6 +3,17 @@
 @section('title', 'Student List')
 
 @section('content')
+@if (session('success'))
+    <script>
+        alert("{{ session('success') }}");
+    </script>
+@endif
+
+@if (session('message'))
+    <script>
+        alert("{{ session('message') }}");
+    </script>
+@endif
     <div class="min-h-screen flex flex-col items-center justify-center bg-gray-800 p-6">
         <h1 class="text-5xl font-bold text-blue-600 mb-6">Student List</h1>
         <h2 class="text-3xl font-bold text-blue-600 mb-6">Total Students Registered: {{ $n }}</h2>

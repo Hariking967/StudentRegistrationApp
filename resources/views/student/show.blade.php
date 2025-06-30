@@ -3,6 +3,17 @@
 @section('title', 'Student Info')
 
 @section('content')
+@if (session('success'))
+    <script>
+        alert("{{ session('success') }}");
+    </script>
+@endif
+
+@if (session('message'))
+    <script>
+        alert("{{ session('message') }}");
+    </script>
+@endif
 <div class="min-h-screen flex items-center justify-center bg-gray-800 p-6">
     <div class="bg-white text-blue-600 rounded-lg shadow-md w-full max-w-2xl p-6">
         <h1 class="text-4xl font-bold mb-4 text-center">Student Information</h1>

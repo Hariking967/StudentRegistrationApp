@@ -15,7 +15,10 @@ class StudentController extends Controller
     {
         $student = Student::where('officialemail', Auth::user()->email)->first();
         if ($student) {
-            return redirect("/students/{$student->id}")->with('success', 'Student added successfully!');
+            return redirect("/students/{$student->rollno}")->with('success', 'Student exists!');
+        }
+        if (session('success')) {
+            return view('student.create')->with('success', 'Logged in successfully');
         }
         return view('student.create');
     }
@@ -35,7 +38,7 @@ class StudentController extends Controller
 
         try {
             $student = Student::create($data);
-            return redirect("/students/{$student->id}")->with('success', 'Student added successfully!');
+            return redirect("/students/{$student->rollno}")->with('success', 'Student added successfully!');
         } catch (QueryException $e) {
             if ($e->getCode() == 23000) {
                 return back()
@@ -56,7 +59,7 @@ class StudentController extends Controller
             if (!$student) {
                 return redirect('/students/create');
             }
-            return redirect("/students/{$student->id}");
+            return redirect("/students/{$student->rollno}");
         }
         $students = Student::latest()->get();
         $n = Student::count();

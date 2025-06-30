@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         $data = request()->validate([
             'name' => ['required'],
-            'email' => ['required', 'email', 'unique:users'],
+            'email' => ['required', 'email'], //removed: , 'unique:users'
             'password' => ['required', 'min:6', 'confirmed']
         ]);
         $exist = User::where('email', $data['email'])->first();

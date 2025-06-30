@@ -3,11 +3,18 @@
 @section('title','Welcome')
 
 @section('content')
-@if (session('message'))
-    <div class="bg-red-500 text-white px-4 py-2 rounded mb-4 text-sm">
-        {{ session('message') }}
-    </div>
+@if (session('success'))
+    <script>
+        alert("{{ session('success') }}");
+    </script>
 @endif
+
+@if (session('message'))
+    <script>
+        alert("{{ session('message') }}");
+    </script>
+@endif
+
 <div class="flex flex-col items-center justify-center min-h-screen text-center">
     <h1 class="text-5xl">
         Welcome to Student Registration!!!

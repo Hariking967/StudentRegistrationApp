@@ -6,16 +6,16 @@
     <div class="min-h-screen flex items-center justify-center bg-gray-800">
         <div class="bg-gray-800 p-8 rounded shadow-md w-full max-w-md">
             <h1 class="text-3xl font-bold text-green-600 mb-6 text-center">User Login</h1>
-            @if (session('message'))
-                <div class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded mb-4 text-sm">
-                    {{ session('message') }}
-                </div>
+            @if (session('success'))
+                <script>
+                    alert("{{ session('success') }}");
+                </script>
             @endif
 
-            @if (session('success'))
-                <div class="bg-green-100 text-green-800 px-4 py-2 rounded mb-4 text-sm">
-                    {{ session('success') }}
-                </div>
+            @if (session('message'))
+                <script>
+                    alert("{{ session('message') }}");
+                </script>
             @endif
             <form method="POST" action="/login">
                 @csrf

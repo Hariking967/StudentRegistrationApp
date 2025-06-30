@@ -19,4 +19,8 @@ class Student extends Model
         'dept',
         'passout'
     ];
+    public function getRouteKeyName()
+    {
+        return 'rollno';
+    }
 }
