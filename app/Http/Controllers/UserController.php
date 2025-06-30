@@ -65,3 +65,5 @@ class UserController extends Controller
         return redirect('/')->with('success', 'Logged out successfully.');
     }
 }
+
+//this is working
