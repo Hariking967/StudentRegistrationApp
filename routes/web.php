@@ -28,5 +28,5 @@ Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::fallback(function () {
-    return view('welcome')->with('message', 'Page not found!');
+    return view('fallback');
 });
