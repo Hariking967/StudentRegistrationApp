@@ -48,4 +48,4 @@
                 <button type="submit"
                         class="w-full bg-blue-600 h-10 text-white py-2 rounded hover:bg-blue-500 transition duration-200">
                     Register
-                </butt
+                </button>
