@@ -30,11 +30,11 @@
         </div>
 
         <div class="mt-8 flex justify-end gap-4">
-            <a href="/students/{{ $student->id }}/edit" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded transition duration-200">
+            <a href="/students/{{ $student->rollno }}/edit" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded transition duration-200">
                 Edit
             </a>
 
-            <form action="/students/{{ $student->id }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this student?');">
+            <form action="/students/{{ $student->rollno }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this student?');">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded transition duration-200">
