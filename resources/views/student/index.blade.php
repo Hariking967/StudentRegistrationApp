@@ -8,11 +8,13 @@
         <h2 class="text-3xl font-bold text-blue-600 mb-6">Total Students Registered: {{ $n }}</h2>
         @foreach ($students as $student)
             <div class="w-full max-w-xl bg-white text-blue-600 shadow-md rounded-lg p-4 mb-4">
-                <div class="text-lg font-semibold">Roll No: {{ $student->rollno }}</div>
-                <div>Name: {{ $student->name }}</div>
-                <div>Personal Email: {{ $student->email }}</div>
-                <div>Department: {{ $student->dept }}</div>
-                <div>CGPA: {{ $student->cgpa }}</div>
+                <div><span class="font-semibold">Roll Number:</span> {{ $student->rollno }}</div>
+                <div><span class="font-semibold">Name:</span> {{ $student->name }}</div>
+                <div><span class="font-semibold">Date of Birth:</span> {{ $student->dob }}</div>
+                <div><span class="font-semibold">Personal Email:</span> {{ $student->email }}</div>
+                <div><span class="font-semibold">Contact:</span> {{ $student->contact }}</div>
+                <div><span class="font-semibold">Department:</span> {{ $student->dept }}</div>
+                <div><span class="font-semibold">Passout Year:</span> {{ $student->passout }}</div>
 
                 <div class="mt-4 flex justify-end space-x-4">
                     <a href="/students/{{ $student->id }}/edit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 transition">Edit</a>

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Student;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 
 class StudentController extends Controller
 {
@@ -28,9 +30,24 @@ class StudentController extends Controller
             'dept' => ['required'],
             'passout' => ['required', 'numeric', 'digits:4']
         ]);
+
         $data['officialemail'] = Auth::user()->email;
-        $student = Student::create($data);
-        return redirect("/students/{$student->id}")->with('success', 'Student added successfully!');
+
+        try {
+            $student = Student::create($data);
+            return redirect("/students/{$student->id}")->with('success', 'Student added successfully!');
+        } catch (QueryException $e) {
+            if ($e->getCode() == 23000) {
+                return back()
+                    ->withErrors(['contact' => 'Contact number or email already exists.'])
+                    ->withInput();
+            }
+
+            Log::error($e); // Log other errors
+            return back()
+                ->withErrors(['error' => 'Something went wrong. Please try again.'])
+                ->withInput();
+        }
     }
     public function index()
     {
@@ -62,6 +79,7 @@ class StudentController extends Controller
     public function update(Student $student)
     {
         $predata = Student::where('officialemail', $student->officialemail)->first();
+
         $data = request()->validate([
             'rollno' => ['required', Rule::unique('students', 'rollno')->ignore($student->id)],
             'name' => ['required'],
@@ -71,13 +89,29 @@ class StudentController extends Controller
             'dept' => ['required'],
             'passout' => ['required', 'numeric', 'digits:4']
         ]);
+
         $data['officialemail'] = $predata->officialemail;
-        $student->update($data);
-        if (Auth::user()->email == 'admin@gmail.com') {
-            return redirect("/students");
+
+        try {
+            $student->update($data);
+            if (Auth::user()->email == 'admin@gmail.com') {
+                return redirect("/students")->with('success', 'Student updated successfully!');
+            }
+            return redirect("/students/{$student->id}")->with('success', 'Student updated successfully!');
+        } catch (QueryException $e) {
+            if ($e->getCode() == 23000) {
+                return back()
+                    ->withErrors(['contact' => 'Contact number or email already exists.'])
+                    ->withInput();
+            }
+
+            Log::error($e);
+            return back()
+                ->withErrors(['error' => 'An unexpected error occurred while updating.'])
+                ->withInput();
         }
-        return redirect("/students/{$student->id}")->with('success', 'Student updated successfully!');
     }
+
     public function destroy(Student $student)
     {
         $student->delete();
