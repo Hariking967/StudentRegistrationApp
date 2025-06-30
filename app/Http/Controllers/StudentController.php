@@ -100,7 +100,7 @@ class StudentController extends Controller
             if (Auth::user()->email == 'admin@gmail.com') {
                 return redirect("/students")->with('success', 'Student updated successfully!');
             }
-            return redirect("/students/{$student->id}")->with('success', 'Student updated successfully!');
+            return redirect("/students/{$student->rollno}")->with('success', 'Student updated successfully!');
         } catch (QueryException $e) {
             if ($e->getCode() == 23000) {
                 return back()

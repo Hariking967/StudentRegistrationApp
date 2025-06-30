@@ -17,7 +17,7 @@
             </div>
         @endif
 
-        <form method="POST" action="/students/{{ $student->id }}">
+        <form method="POST" action="/students/{{ $student->rollno }}">
             @method('PATCH')
             @csrf
 
